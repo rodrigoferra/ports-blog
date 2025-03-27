@@ -1,4 +1,4 @@
-module myapi-modules
+module github.com/rodrigoferra/ports-blog
 
 go 1.24
 

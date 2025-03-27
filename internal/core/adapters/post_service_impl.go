@@ -3,8 +3,8 @@ package adapters
 import (
 	"context"
 	"github.com/google/uuid"
-	"myapi-modules/internal/core/domain"
-	"myapi-modules/internal/core/ports"
+	"github.com/rodrigoferra/ports-blog/internal/core/domain"
+	"github.com/rodrigoferra/ports-blog/internal/core/ports"
 	"time"
 )
 

@@ -2,7 +2,7 @@ package ports
 
 import (
 	"context"
-	"myapi-modules/internal/core/domain"
+	"github.com/rodrigoferra/ports-blog/internal/core/domain"
 )
 
 type PostRepository interface {

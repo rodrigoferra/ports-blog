@@ -3,9 +3,9 @@ package repositories
 import (
 	"context"
 	"errors"
+	"github.com/rodrigoferra/ports-blog/internal/core/domain"
+	"github.com/rodrigoferra/ports-blog/internal/core/ports"
 	"gorm.io/gorm"
-	"myapi-modules/internal/core/domain"
-	"myapi-modules/internal/core/ports"
 )
 
 type PostRepositoryImpl struct {

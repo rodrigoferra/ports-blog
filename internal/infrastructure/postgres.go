@@ -2,10 +2,10 @@ package infrastructure
 
 import (
 	"fmt"
+	"github.com/rodrigoferra/ports-blog/internal/infrastructure/entities"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 	"log"
-	"myapi-modules/internal/infrastructure/entities"
 )
 
 func InitPostgresDatabase(

@@ -2,8 +2,8 @@ package handlers
 
 import (
 	"github.com/labstack/echo/v4"
-	"myapi-modules/internal/core/domain"
-	"myapi-modules/internal/core/ports"
+	"github.com/rodrigoferra/ports-blog/internal/core/domain"
+	"github.com/rodrigoferra/ports-blog/internal/core/ports"
 	"net/http"
 )
 

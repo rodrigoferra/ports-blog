@@ -3,11 +3,11 @@ package main
 import (
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
+	"github.com/rodrigoferra/ports-blog/internal/core/adapters"
+	"github.com/rodrigoferra/ports-blog/internal/infrastructure"
+	"github.com/rodrigoferra/ports-blog/internal/infrastructure/handlers"
+	"github.com/rodrigoferra/ports-blog/internal/infrastructure/repositories"
 	"log"
-	"myapi-modules/internal/core/adapters"
-	"myapi-modules/internal/infrastructure"
-	"myapi-modules/internal/infrastructure/handlers"
-	"myapi-modules/internal/infrastructure/repositories"
 )
 
 func main() {

@@ -1,6 +1,9 @@
 package entities
 
-import "time"
+import (
+	"github.com/rodrigoferra/ports-blog/internal/core/domain"
+	"time"
+)
 
 type CommentEntity struct {
 	ID        string     `gorm:"primaryKey;type:varchar(255);not null" json:"id"`
@@ -12,4 +15,11 @@ type CommentEntity struct {
 
 func (CommentEntity) TableName() string {
 	return "comments"
+}
+
+func (c CommentEntity) ToDomain() domain.Comment {
+	return domain.Comment{
+		ID:      c.ID,
+		Content: c.Content,
+	}
 }

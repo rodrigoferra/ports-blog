@@ -15,62 +15,62 @@ func NewPostHandler(service ports.PostService) *PostHandler {
 	return &PostHandler{service: service}
 }
 
-func (h *PostHandler) Create(c echo.Context) error {
+func (h *PostHandler) Create(ctx echo.Context) error {
 	var dto domain.PostCreateDTO
-	if err := c.Bind(&dto); err != nil {
+	if err := ctx.Bind(&dto); err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
 	}
 	// Validate input
-	if err := c.Validate(dto); err != nil {
+	if err := ctx.Validate(dto); err != nil {
 		return err
 	}
-	post, err := h.service.Create(c.Request().Context(), dto)
+	post, err := h.service.Create(ctx.Request().Context(), dto)
 	if err != nil {
 		return echo.NewHTTPError(http.StatusInternalServerError, err.Error())
 	}
-	return c.JSON(http.StatusCreated, post)
+	return ctx.JSON(http.StatusCreated, post)
 }
 
-func (h *PostHandler) GetByID(c echo.Context) error {
-	ID := c.Param("id")
-	post, err := h.service.GetByID(c.Request().Context(), ID)
+func (h *PostHandler) GetByID(ctx echo.Context) error {
+	ID := ctx.Param("id")
+	post, err := h.service.GetByID(ctx.Request().Context(), ID)
 	if err != nil {
 		return echo.NewHTTPError(http.StatusInternalServerError, err.Error())
 	}
 	if post == nil {
 		return echo.NewHTTPError(http.StatusNotFound, "Post not found")
 	}
-	return c.JSON(http.StatusOK, post)
+	return ctx.JSON(http.StatusOK, post)
 }
 
-func (h *PostHandler) List(c echo.Context) error {
-	posts, err := h.service.List(c.Request().Context())
+func (h *PostHandler) List(ctx echo.Context) error {
+	posts, err := h.service.List(ctx.Request().Context())
 	if err != nil {
 		return echo.NewHTTPError(http.StatusInternalServerError, err.Error())
 	}
-	return c.JSON(http.StatusOK, posts)
+	return ctx.JSON(http.StatusOK, posts)
 }
 
-func (h *PostHandler) Update(c echo.Context) error {
-	ID := c.Param("id")
+func (h *PostHandler) Update(ctx echo.Context) error {
+	ID := ctx.Param("id")
 	var dto domain.PostUpdateDTO
-	if err := c.Bind(&dto); err != nil {
+	if err := ctx.Bind(&dto); err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
 	}
 	// Validate input
-	if err := c.Validate(dto); err != nil {
+	if err := ctx.Validate(dto); err != nil {
 		return err
 	}
-	if err := h.service.Update(c.Request().Context(), ID, dto); err != nil {
+	if err := h.service.Update(ctx.Request().Context(), ID, dto); err != nil {
 		return echo.NewHTTPError(http.StatusInternalServerError, err.Error())
 	}
-	return c.NoContent(http.StatusNoContent)
+	return ctx.NoContent(http.StatusNoContent)
 }
 
-func (h *PostHandler) Delete(c echo.Context) error {
-	ID := c.Param("id")
-	if err := h.service.Delete(c.Request().Context(), ID); err != nil {
+func (h *PostHandler) Delete(ctx echo.Context) error {
+	ID := ctx.Param("id")
+	if err := h.service.Delete(ctx.Request().Context(), ID); err != nil {
 		return echo.NewHTTPError(http.StatusInternalServerError, err.Error())
 	}
-	return c.NoContent(http.StatusNoContent)
+	return ctx.NoContent(http.StatusNoContent)
 }

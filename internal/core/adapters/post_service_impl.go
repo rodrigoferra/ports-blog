@@ -2,9 +2,9 @@ package adapters
 
 import (
 	"context"
-	"github.com/google/uuid"
 	"myapi-modules/internal/core/domain"
 	"myapi-modules/internal/core/ports"
+	"myapi-modules/internal/infrastructure/dtos"
 	"time"
 )
 
@@ -16,13 +16,8 @@ func NewPostService(repo ports.PostRepository) ports.PostService {
 	return &PostServiceImpl{repo: repo}
 }
 
-func (p *PostServiceImpl) Create(ctx context.Context, dto domain.PostCreateDTO) (*domain.Post, error) {
-	post := &domain.Post{
-		Subject:   dto.Subject,
-		Content:   dto.Content,
-		ID:        uuid.NewString(),
-		CreatedAt: time.Now(),
-	}
+func (p *PostServiceImpl) Create(ctx context.Context, dto dtos.PostCreateDTO) (*domain.Post, error) {
+	post := domain.CreatePostFromDto(dto)
 	if err := p.repo.Create(ctx, post); err != nil {
 		return nil, err
 	}
@@ -37,7 +32,7 @@ func (p *PostServiceImpl) List(ctx context.Context) ([]domain.Post, error) {
 	return p.repo.List(ctx)
 }
 
-func (p *PostServiceImpl) Update(ctx context.Context, id string, dto domain.PostUpdateDTO) error {
+func (p *PostServiceImpl) Update(ctx context.Context, id string, dto dtos.PostUpdateDTO) error {
 	post, err := p.repo.GetByID(ctx, id)
 	if err != nil || post == nil {
 		return err

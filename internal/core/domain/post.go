@@ -1,6 +1,8 @@
 package domain
 
 import (
+	"github.com/google/uuid"
+	"myapi-modules/internal/infrastructure/dtos"
 	"time"
 )
 
@@ -13,13 +15,11 @@ type Post struct {
 	Comments  []Comment
 }
 
-type PostCreateDTO struct {
-	Subject string
-	Content string
-}
-
-type PostUpdateDTO struct {
-	ID      string
-	Subject *string
-	Content *string
+func CreatePostFromDto(p dtos.PostCreateDTO) *Post {
+	return &Post{
+		ID:        uuid.NewString(),
+		Subject:   p.Subject,
+		Content:   p.Content,
+		CreatedAt: time.Now(),
+	}
 }

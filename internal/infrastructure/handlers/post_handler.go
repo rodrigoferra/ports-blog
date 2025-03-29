@@ -2,8 +2,8 @@ package handlers
 
 import (
 	"github.com/labstack/echo/v4"
-	"myapi-modules/internal/core/domain"
 	"myapi-modules/internal/core/ports"
+	"myapi-modules/internal/infrastructure/dtos"
 	"net/http"
 )
 
@@ -16,7 +16,7 @@ func NewPostHandler(service ports.PostService) *PostHandler {
 }
 
 func (h *PostHandler) Create(c echo.Context) error {
-	var dto domain.PostCreateDTO
+	var dto dtos.PostCreateDTO
 	if err := c.Bind(&dto); err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
 	}
@@ -53,7 +53,7 @@ func (h *PostHandler) List(c echo.Context) error {
 
 func (h *PostHandler) Update(c echo.Context) error {
 	ID := c.Param("id")
-	var dto domain.PostUpdateDTO
+	var dto dtos.PostUpdateDTO
 	if err := c.Bind(&dto); err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
 	}
